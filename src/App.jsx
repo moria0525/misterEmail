@@ -9,7 +9,8 @@ import { EmailIndex } from './pages/EmailIndex';
 //import { EmailDetails } from './pages/EmailDetails';
 //import { AboutTeam } from './cmps/AboutTeam';
 //import { AboutVision } from './cmps/AboutVision';
-
+import React, { Component } from 'react';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 export function App() {
 

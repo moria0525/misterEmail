@@ -3,7 +3,7 @@ import { EmailPreview } from "./EmailPreview";
 export function EmailList({ emails, onRemoveEmail }) {
     console.log(emails)
     return (
-        
+
         <ul className="email-list">
             {emails.map(email =>
                 <li key={email.id}>
@@ -16,3 +16,6 @@ export function EmailList({ emails, onRemoveEmail }) {
         </ul>
     )
 }
+
+
+

@@ -4,8 +4,8 @@
     box-shadow: 0 0 11px #0000002b;
     padding: 15px;
     display: flex;
-    flex-direction: column;
     overflow: hidden;
+    justify-content: space-between;
     border-radius: 5px;
     cursor: pointer;
 }
