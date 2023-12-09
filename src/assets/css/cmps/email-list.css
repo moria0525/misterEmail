@@ -1,17 +1,47 @@
+
+
 .email-list {
-    /* display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-   */
+    display: flex;
+    flex-direction: column; /* Set the direction to column */
     padding: 0;
     gap: 15px;
     list-style-type: none;
+    width: 700px;
 }
 
 .email-list .email-actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    background-color: #000000c9;
     transition: transform 0.2s;
+   
+}
+
+
+.filter-date, .filter-subject, .filter-all{
+    font-family: aktiv-grotesk-extended, sans-serif;
+    font-weight: 700;
+    border: 2px solid #fffefe;
+    border-radius: 3rem;
+    overflow: hidden;
+    color: var(--font-color-black);
+    background-color: var(--btn-bg-color-hover);
+}
+.email-container {
+    display: flex;
+}
+
+.left-sidebar .email-menu {
+    text-align: left;
+    padding: 10px;
+    line-height: 40px;
+}
+.box-compose{
+	
+	border-radius:28px;
+	display:inline-block;
+	cursor:pointer;
+	padding:10px 10px;
+	text-decoration:none;
+	
 }

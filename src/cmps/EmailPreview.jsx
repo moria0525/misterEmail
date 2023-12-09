@@ -1,18 +1,25 @@
-
-
-import { FaHeart, FaRegStar } from "react-icons/fa";
+import React from "react";
+import { FaHourglassEnd, FaRegStar, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
-
+import { LuMailOpen } from "react-icons/lu";
+import { IoShareOutline } from "react-icons/io5";
 
 export function EmailPreview({ email }) {
-    console.log(email);
     return (
-        <article className="email-preview">
-             <FaRegStar/>
-            <h1>{email.from}</h1>
-            <h2>{email.subject}</h2>
-            <h4>{email.sentAt}</h4>
-        </article>
-    )
+        <div className="email-main">
+            <div className="email-preview">
+                <div className="icon-star" onClick={() => { alert('clicked star') }}>
+                    <FaRegStar />
+                    <span>{email.from}</span>
+                </div>
+                <h4>{email.subject}</h4>
+                <h4 className="email-sentat">{email.sentAt}</h4>
+            </div>
+            <div className="email-hover">
+                <IoShareOutline />
+                <LuMailOpen />
+                <FaTrash />
+            </div>
+        </div>
+    );
 }

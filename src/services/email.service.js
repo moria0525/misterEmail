@@ -71,10 +71,10 @@ function _createemails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
     if (!emails || !emails.length) {
         emails = [
-            {subject: 'hello', from: 'moria@', sentAt: '21-11-23' },
-            {subject: 'subject', from: 'aaa@', sentAt: '21-11-23' },
-            {subject: 'bye', from: '@bbb', sentAt: '21-11-23' },
-            {subject: 'info', from: '@ccc', sentAt: '21-11-23' }
+            {subject: 'New Mail', from: 'moria05@gmail.com', sentAt:'Dec 3' },
+            {subject: 'My Work', from: 'moria02@walla.com', sentAt: 'Dec 2' },
+            {subject: 'HomeWork', from: 'moria332@gmail.com', sentAt:'Dec 1' },
+            {subject: 'My Week', from: 'moria392@gmail.com', sentAt: '2022' }
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)
     }
