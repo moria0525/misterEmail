@@ -62,8 +62,3 @@ export function EmailList({ emails, onRemoveEmail }) {
         </div>
     );
 }
-
-//   {/* <div className="search-container">
-//                     <div className="search-icon"></div>
-//                     <input type="text" className="search-input" placeholder="Search"/>
-//                 </div> */}

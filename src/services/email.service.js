@@ -20,17 +20,17 @@ const loggedinUser = {
 
 _createemails()
 
- async function query(filterBy) {
-     let emails = await storageService.query(STORAGE_KEY)
-     if (filterBy) {
-       let {subject = ''} = filterBy
+async function query(filterBy) {
+    let emails = await storageService.query(STORAGE_KEY)
+    if (filterBy) {
+        let { subject = '' } = filterBy
         const regexModelTerm = new RegExp(subject, 'i')
         emails = emails.filter(email =>
             regexModelTerm.test(email.subject)
         )
     }
-     return emails
- }
+    return emails
+}
 
 function getById(id) {
     return storageService.get(STORAGE_KEY, id)
@@ -74,10 +74,10 @@ function _createemails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
     if (!emails || !emails.length) {
         emails = [
-            { subject: 'New Mail', from: 'moria05@gmail.com', sentAt: 'Dec 3' },
-            { subject: 'My Work', from: 'moria02@walla.com', sentAt: 'Dec 2' },
-            { subject: 'HomeWork', from: 'moria332@gmail.com', sentAt: 'Dec 1' },
-            { subject: 'My Week', from: 'moria392@gmail.com', sentAt: '2022' }
+            { id : utilService.makeId(), subject: 'New Mail', from: 'moria05@gmail.com', sentAt: 'Dec 3' },
+            { id : utilService.makeId(), subject: 'My Work', from: 'moria02@walla.com', sentAt: 'Dec 2' },
+            { id : utilService.makeId(), subject: 'HomeWork', from: 'moria332@gmail.com', sentAt: 'Dec 1' },
+            { id : utilService.makeId(), subject: 'My Week', from: 'moria392@gmail.com', sentAt: '2022' }
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)
     }
