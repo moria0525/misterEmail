@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
-import { Emailservice } from "../services/email.service"
+import { emailService } from "../services/email.service"
 
 export function EmailFilter({ filterBy, onSetFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
-    function handleChange(ev) {
-        let { name: field, value, type } = ev.target
-        if (type === 'number') value = +value
+    function handelChange(ev) {
+        let { name: field, value } = ev.target
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
@@ -14,23 +13,11 @@ export function EmailFilter({ filterBy, onSetFilter }) {
         onSetFilter(filterByToEdit)
     }, [filterByToEdit])
 
-    // function handleModelChange(value) {
-    //     setFilterByToEdit(prevFilter => ({ ...prevFilter, model: value }))
-    // }
-
-    // function handleBatteryChange(value) {
-    //     setFilterByToEdit(prevFilter => ({ ...prevFilter, minBatteryStatus: value }))
-    // }
-
-    const { model, minBatteryStatus } = filterByToEdit
+    const { subject } = filterByToEdit
     return (
-        <h1>filter</h1>
-    //     <form className="email-filter">
-    //       //  <label htmlFor="model">Model</label>
-    //       //  <input onChange={handleChange} id="model" value={model} name="model" type="text" />
-
-    //       //  <label htmlFor="minBatteryStatus">Battery</label>
-    //    //     <input onChange={handleChange} id="minBatteryStatus" value={minBatteryStatus || ''} name="minBatteryStatus" type="number" />
-    //     </form>
+        <form className="email-filter">
+            <label htmlFor="subject">Search</label>
+            <input onChange={handelChange} id="subject" value={subject} name="subject" type="text" />
+        </form>
     )
 }

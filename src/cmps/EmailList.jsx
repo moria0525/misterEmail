@@ -40,10 +40,7 @@ export function EmailList({ emails, onRemoveEmail }) {
                 </ul>
             </div>
             <div className="email-content">
-                <div className="search-container">
-                    <div className="search-icon"></div>
-                    <input type="text" className="search-input" placeholder="Search"/>
-                </div>
+              
                 <button className="filter-date" onClick={() => { alert('filter date') }}>
                     <MdOutlineKeyboardArrowUp /> Date
                 </button>
@@ -65,3 +62,8 @@ export function EmailList({ emails, onRemoveEmail }) {
         </div>
     );
 }
+
+//   {/* <div className="search-container">
+//                     <div className="search-icon"></div>
+//                     <input type="text" className="search-input" placeholder="Search"/>
+//                 </div> */}
