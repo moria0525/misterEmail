@@ -6,7 +6,7 @@ import { About } from './pages/AboutPage';
 import { AppFooter } from './cmps/AppFooter'
 import { AppHeader } from './cmps/AppHeader'
 import { EmailIndex } from './pages/EmailIndex';
-//import { EmailDetails } from './pages/EmailDetails';
+import { EmailDetails } from './cmps/EmailDetails';
 //import { AboutTeam } from './cmps/AboutTeam';
 //import { AboutVision } from './cmps/AboutVision';
 import React, { Component } from 'react';
@@ -22,6 +22,7 @@ export function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/email" element={<EmailIndex />} />
+                        <Route path="/email/:emailId" element={<EmailDetails/>} />
                     </Routes>
                 </main>
                 <AppFooter />

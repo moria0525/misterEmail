@@ -53,7 +53,7 @@ export function EmailList({ emails, onRemoveEmail }) {
                 <ul className="email-list">
                     {emails.map(email =>
                         <li key={email.id}>
-                            <EmailPreview email={email} />
+                            <EmailPreview email={email}  />
                             <div className="email-actions"></div>
                         </li>
                     )}
