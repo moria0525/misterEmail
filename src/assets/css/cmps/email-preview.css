@@ -4,7 +4,7 @@
     box-shadow: 0 0 11px #ff8a8a2b;
     padding: 15px;
     display: flex;
-    
+    font-weight: bold;
     overflow: hidden;
     justify-content: space-between;
     border-radius: 5px;
@@ -37,4 +37,7 @@ span {
 .email-menu{
     list-style-type: none;
 }
-
+.read {
+    font-weight: bold;
+    
+}

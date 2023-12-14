@@ -1,14 +1,18 @@
-import React from "react";
-import { FaHourglassEnd, FaRegStar, FaTrash } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaRegStar, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { LuMailOpen } from "react-icons/lu";
 import { IoShareOutline } from "react-icons/io5";
 
-export function EmailPreview({ email }) {
+export function EmailPreview({ email,  onUpdateEmail }) {
+    // const [isStar, setIsStar ] = useState(email.isStarred)
+    
+     const isRead = "read"
+    
     return (
         <div className="email-main">
-            <Link to={`/email/${email.id}`}>
-                <article className="email-preview">
+            <Link to={`/email/${email.id}`} onClick={() => {onUpdateEmail(email)}}>
+                <article className= {`email-preview ${isRead}`}>
                     <div className="icon-star" onClick={() => { alert('clicked star') }}>
                         <FaRegStar />
                         <span>{email.from}</span>

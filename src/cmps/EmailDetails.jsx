@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Navigate, useNavigate, useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { emailService } from "../services/email.service"
 
 
@@ -32,15 +32,9 @@ export function EmailDetails() {
             <h3>{email.sentAt}</h3>
             <h3>from: {email.from}</h3>
             <h3>subject: {email.subject}</h3>
-            <h3>{email.txt}</h3>
-            
+            <h3>{email.body}</h3>
+            <h3>isRead: {String(email.isRead)}</h3>
             <button onClick={onBack}>Back</button>
         </section>
     )
 }
- 
-            // <h3>Type: {robot.type}</h3>
-            // <h3>Model: {robot.model}</h3>
-            // <h3>Battery: {robot.batteryStatus}</h3>
-            // <Link to={`/robot/r3`} >Next Robot</Link> */
-            

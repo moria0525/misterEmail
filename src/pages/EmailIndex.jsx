@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { EmailList } from "../cmps/EmailList";
 import { EmailFilter } from "../cmps/EmailFilter";
 import { emailService } from "../services/email.service";
+import { EmailPreview } from "../cmps/EmailPreview";
 
 export function EmailIndex() {
 
@@ -19,11 +20,33 @@ export function EmailIndex() {
 
     async function onRemoveEmails(emailId) {
         try {
-            await e.remSve(emailId)
+            await emailService.remove(emailId)
             setEmails(prevEmails => {
-                return prevEmails.filter(email => email.id !== email.id)
+                return prevEmails.filter(email => email.id !== emailId)
             })
         } catch (error) {
+            console.log('error:', error)
+        }
+    }
+
+    async function onUpdateEmail(emailToUpdate) {
+        try {
+            const updatedEmail = {
+                ...emailToUpdate,
+                isRead: !emailToUpdate.isRead
+            }
+            await emailService.save(updatedEmail)
+            setEmails(prevEmails => {
+                return prevEmails.map(email => {
+                    if (email.id === emailToUpdate.id) {
+                        return updatedEmail
+                    }
+                    console.log("success: onUpdateEmail")
+                    return email
+                })
+            })
+        } catch (error) {
+            alert("error: onUpdateEmail")
             console.log('error:', error)
         }
     }
@@ -33,12 +56,12 @@ export function EmailIndex() {
     }
 
     if (!emails) return <div>Loading...</div>
-    const {subject} = filterBy
+    const { body } = filterBy
     return (
         <section className="email-index">
             <h1>Welcome! this is our misterEmail</h1>
-            <EmailFilter filterBy={subject} onSetFilter={onSetFilter}/>
-            <EmailList emails={emails} onRemoveEmails={onRemoveEmails} />
+            <EmailFilter filterBy={body} onSetFilter={onSetFilter} />
+            <EmailList emails={emails} onRemoveEmails={onRemoveEmails} onUpdateEmail={onUpdateEmail} />
         </section>
     )
 }

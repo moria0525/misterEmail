@@ -23,10 +23,10 @@ _createemails()
 async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY)
     if (filterBy) {
-        let { subject = '' } = filterBy
-        const regexModelTerm = new RegExp(subject, 'i')
+        let { body = '' } = filterBy
+        const regexModelTerm = new RegExp(body, 'i')
         emails = emails.filter(email =>
-            regexModelTerm.test(email.subject)
+            regexModelTerm.test(email.body)
         )
     }
     return emails
@@ -49,7 +49,7 @@ function save(emailToSave) {
     }
 }
 
-function createemail(id = '', subject = '', body = '', isRead = false, isStarred = false, sentAt = '', from = '', to = '') {
+function createemail(id = '', subject = '', body = '', isRead, isStarred = false, sentAt = '', from = '', to = '') {
     return {
         id,
         subject,
@@ -57,7 +57,7 @@ function createemail(id = '', subject = '', body = '', isRead = false, isStarred
         isRead,
         isStarred,
         sentAt,
-        //removedAt : null, 
+        removedAt : null, 
         from,
         to
     }
@@ -65,8 +65,8 @@ function createemail(id = '', subject = '', body = '', isRead = false, isStarred
 
 function getDefaultFilter() {
     return {
-        subject: '',
-        isRead: true,
+        body: '',
+        isRead: false,
     }
 }
 
@@ -74,10 +74,10 @@ function _createemails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
     if (!emails || !emails.length) {
         emails = [
-            { id : utilService.makeId(), subject: 'New Mail', from: 'moria05@gmail.com', sentAt: 'Dec 3' },
-            { id : utilService.makeId(), subject: 'My Work', from: 'moria02@walla.com', sentAt: 'Dec 2' },
-            { id : utilService.makeId(), subject: 'HomeWork', from: 'moria332@gmail.com', sentAt: 'Dec 1' },
-            { id : utilService.makeId(), subject: 'My Week', from: 'moria392@gmail.com', sentAt: '2022' }
+            { id : utilService.makeId(), subject: 'New Mail', body: "hi, ", from: 'moria05@gmail.com', sentAt: 'Dec 3', isRead:false},
+            { id : utilService.makeId(), subject: 'My Work', body: "hgbhnb", from: 'moria02@walla.com', sentAt: 'Dec 2' },
+            { id : utilService.makeId(), subject: 'HomeWork', body: "gbynh", from: 'moria332@gmail.com', sentAt: 'Dec 1' },
+            { id : utilService.makeId(), subject: 'My Week', body: "hi, how are you today?", from: 'moria392@gmail.com', sentAt: '2022' }
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)
     }

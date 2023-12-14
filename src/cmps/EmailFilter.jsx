@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { emailService } from "../services/email.service"
+import { MdOutlineKeyboardArrowUp } from "react-icons/md"
 
 export function EmailFilter({ filterBy, onSetFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
@@ -13,11 +14,18 @@ export function EmailFilter({ filterBy, onSetFilter }) {
         onSetFilter(filterByToEdit)
     }, [filterByToEdit])
 
-    const { subject } = filterByToEdit
+    const { body, isRead } = filterByToEdit
     return (
-        <form className="email-filter">
-            <label htmlFor="subject">Search</label>
-            <input onChange={handelChange} id="subject" value={subject} name="subject" type="text" />
-        </form>
+        <section className="email-filter">
+            <form>
+                <label htmlFor="body">Search</label>
+                <input onChange={handelChange} id="body" value={body} name="body" type="text" />
+            </form>
+            <label htmlFor="dropSearch"></label>
+            <select value={isRead} onChange={handelChange} name='isRead'>
+                <option value="Read">Read</option>
+                <option value="unRead">unRead</option>
+            </select>
+        </section>
     )
 }
