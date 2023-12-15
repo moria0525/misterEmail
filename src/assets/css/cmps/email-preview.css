@@ -1,7 +1,6 @@
 .email-preview {
     background: #0076fd09;
     background-repeat: no-repeat;
-    box-shadow: 0 0 11px #ff8a8a2b;
     padding: 15px;
     display: flex;
     font-weight: bold;
@@ -37,7 +36,11 @@ span {
 .email-menu{
     list-style-type: none;
 }
-.read {
-    font-weight: bold;
-    
+
+.read{
+    font-weight: normal;  
 }
+.unread{
+    font-weight: bold;  
+}
+

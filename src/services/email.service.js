@@ -49,9 +49,8 @@ function save(emailToSave) {
     }
 }
 
-function createemail(id = '', subject = '', body = '', isRead, isStarred = false, sentAt = '', from = '', to = '') {
+function createemail(id = '', subject = '', body = '', isRead, isStarred, sentAt = '', from = '', to = '') {
     return {
-        id,
         subject,
         body,
         isRead,
@@ -74,10 +73,10 @@ function _createemails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
     if (!emails || !emails.length) {
         emails = [
-            { id : utilService.makeId(), subject: 'New Mail', body: "hi, ", from: 'moria05@gmail.com', sentAt: 'Dec 3', isRead:false},
-            { id : utilService.makeId(), subject: 'My Work', body: "hgbhnb", from: 'moria02@walla.com', sentAt: 'Dec 2' },
-            { id : utilService.makeId(), subject: 'HomeWork', body: "gbynh", from: 'moria332@gmail.com', sentAt: 'Dec 1' },
-            { id : utilService.makeId(), subject: 'My Week', body: "hi, how are you today?", from: 'moria392@gmail.com', sentAt: '2022' }
+            { id : utilService.makeId(), subject: 'New Mail', body: "hi, ", from: 'moria05@gmail.com', sentAt: 'Dec 3', isRead:false, isStarred:false},
+            { id : utilService.makeId(), subject: 'My Work', body: "hgbhnb", from: 'moria02@walla.com', sentAt: 'Dec 2', isRead:false, isStarred:false },
+            { id : utilService.makeId(), subject: 'HomeWork', body: "gbynh", from: 'moria332@gmail.com', sentAt: 'Dec 1', isRead:false, isStarred:false },
+            { id : utilService.makeId(), subject: 'My Week', body: "hi, how are you today?", from: 'moria392@gmail.com', sentAt: '2022', isRead:false , isStarred:false}
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)
     }

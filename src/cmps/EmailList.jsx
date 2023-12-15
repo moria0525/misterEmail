@@ -4,8 +4,7 @@ import { EmailPreview } from "./EmailPreview";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { IoSendOutline } from "react-icons/io5";
 
-export function EmailList({ emails, onRemoveEmail, onUpdateEmail }) {
-    console.log(emails)
+export function EmailList({ emails, onRemoveEmail, onUpdateEmail, onUpdateStar }) {
     return (
         <div className="email-container">
             <div className="left-sidebar">
@@ -40,12 +39,12 @@ export function EmailList({ emails, onRemoveEmail, onUpdateEmail }) {
                 </ul>
             </div>
             <div className="email-content">
-              
-             
+
+
                 <ul className="email-list">
                     {emails.map(email =>
                         <li key={email.id}>
-                            <EmailPreview email={email} onUpdateEmail={onUpdateEmail}/>
+                            <EmailPreview email={email} onUpdateEmail={onUpdateEmail} onUpdateStar={onUpdateStar} />
                             <div className="email-actions"></div>
                         </li>
                     )}

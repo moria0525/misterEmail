@@ -7,7 +7,6 @@ export function EmailDetails() {
     const [email, setEmail] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
-    console.log(params)
 
     useEffect(() => {
         loadEmail()
@@ -34,6 +33,7 @@ export function EmailDetails() {
             <h3>subject: {email.subject}</h3>
             <h3>{email.body}</h3>
             <h3>isRead: {String(email.isRead)}</h3>
+            <h3>isStarred: {String(email.isStarred)}</h3>
             <button onClick={onBack}>Back</button>
         </section>
     )
