@@ -11,6 +11,8 @@ import { EmailDetails } from './cmps/EmailDetails';
 //import { AboutVision } from './cmps/AboutVision';
 import React, { Component } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { EmailList } from './cmps/EmailList';
+import { EmailFolderList } from './cmps/EmailFolderList';
 
 export function App() {
 
@@ -23,6 +25,7 @@ export function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/email" element={<EmailIndex />} />
                         <Route path="/email/:emailId" element={<EmailDetails/>} />
+                        <Route path="/email/starred" element={<EmailFolderList/>}/>
                     </Routes>
                 </main>
                 <AppFooter />
@@ -32,4 +35,3 @@ export function App() {
 
     )
 }
-//        /*<Route path="/email/:emailId" element={<EmailDetails />} />

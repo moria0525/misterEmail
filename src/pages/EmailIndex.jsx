@@ -3,6 +3,7 @@ import { EmailList } from "../cmps/EmailList";
 import { EmailFilter } from "../cmps/EmailFilter";
 import { emailService } from "../services/email.service";
 import { EmailPreview } from "../cmps/EmailPreview";
+import { EmailFolderList } from "../cmps/EmailFolderList";
 
 export function EmailIndex() {
 
@@ -10,22 +11,11 @@ export function EmailIndex() {
     const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
     useEffect(() => {
         loadEmails()
-    }, [filterBy, emails])
+    }, [filterBy])
 
     async function loadEmails() {
         const emails = await emailService.query(filterBy)
         setEmails(emails)
-    }
-
-    async function onRemoveEmails(emailId) {
-        try {
-            await emailService.remove(emailId)
-            setEmails(prevEmails => {
-                return prevEmails.filter(email => email.id !== emailId)
-            })
-        } catch (error) {
-            console.log('error:', error)
-        }
     }
 
     async function onUpdateEmail(emailToUpdate) {
@@ -63,12 +53,13 @@ export function EmailIndex() {
     }
 
     if (!emails) return <div>Loading...</div>
-    const { body } = filterBy
+    const { status, body, isRead } = filterBy
     return (
         <section className="email-index">
             <h1>Welcome! this is our misterEmail</h1>
-            <EmailFilter filterBy={body} onSetFilter={onSetFilter} />
-            <EmailList emails={emails} onRemoveEmails={onRemoveEmails} onUpdateEmail={onUpdateEmail} onUpdateStar={onUpdateStar} />
+            <EmailFilter filterBy={{body,isRead}} onSetFilter={onSetFilter} />
+            <EmailFolderList filterBy={status} onSetFilter={onSetFilter}/>
+            <EmailList emails={emails} onUpdateEmail={onUpdateEmail} onSetFilter={onSetFilter} onUpdateStar={onUpdateStar}/>
         </section>
     )
 }

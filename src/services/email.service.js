@@ -6,7 +6,7 @@ export const emailService = {
     save,
     remove,
     getById,
-    createemail,
+    createEmail,
     getDefaultFilter
 }
 
@@ -17,21 +17,31 @@ const loggedinUser = {
     fullname: 'Mahatma Appsus'
 }
 
-
-_createemails()
-
-async function query(filterBy) {
-    let emails = await storageService.query(STORAGE_KEY)
-    if (filterBy) {
-        let { body = '' } = filterBy
-        const regexModelTerm = new RegExp(body, 'i')
-        emails = emails.filter(email =>
-            regexModelTerm.test(email.body)
-        )
-    }
-    return emails
+const filterBy = {
+    status: 'inbox/sent/star/trash',
+    txt: 'puki', // no need to support complex text search 
+    isRead: true / false / null, // (optional property, if missing: show all) 
 }
 
+_createEmails()
+
+async function query(filterBy) {
+    let emails = await storageService.query(STORAGE_KEY);
+    let { status, body = '', isRead } = filterBy
+    if (filterBy.isRead !== 'All') {
+        emails = emails.filter(email=>
+            email.isRead === isRead)
+    }
+    if (status === 'star') {
+        emails = emails.filter(email => 
+            email.isStarred === true);
+    }
+    if (status === 'trash') {
+        emails = emails.filter(email => 
+            email.removedAt === true);
+    }
+    return emails;
+}
 function getById(id) {
     return storageService.get(STORAGE_KEY, id)
 }
@@ -49,14 +59,14 @@ function save(emailToSave) {
     }
 }
 
-function createemail(id = '', subject = '', body = '', isRead, isStarred, sentAt = '', from = '', to = '') {
+function createEmail(id = '', subject = '', body = '', isRead, isStarred, sentAt = '', from = '', to = '') {
     return {
         subject,
         body,
         isRead,
         isStarred,
         sentAt,
-        removedAt : null, 
+        removedAt: null,
         from,
         to
     }
@@ -64,24 +74,50 @@ function createemail(id = '', subject = '', body = '', isRead, isStarred, sentAt
 
 function getDefaultFilter() {
     return {
+        status:'inbox/sent/star/trash',
         body: '',
-        isRead: false,
+        isRead: "All",
     }
 }
 
-function _createemails() {
+function _createEmails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
     if (!emails || !emails.length) {
         emails = [
-            { id : utilService.makeId(), subject: 'New Mail', body: "hi, ", from: 'moria05@gmail.com', sentAt: 'Dec 3', isRead:false, isStarred:false},
-            { id : utilService.makeId(), subject: 'My Work', body: "hgbhnb", from: 'moria02@walla.com', sentAt: 'Dec 2', isRead:false, isStarred:false },
-            { id : utilService.makeId(), subject: 'HomeWork', body: "gbynh", from: 'moria332@gmail.com', sentAt: 'Dec 1', isRead:false, isStarred:false },
-            { id : utilService.makeId(), subject: 'My Week', body: "hi, how are you today?", from: 'moria392@gmail.com', sentAt: '2022', isRead:false , isStarred:false}
+            {
+                id: utilService.makeId(),
+                subject: "helllo",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(1702745276),
+                removedAt: null,
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
+            },
+            {
+                id: utilService.makeId(),
+                subject: "hi",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(170274527543),
+                removedAt: null,
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
+            },
+            {
+                id: utilService.makeId(),
+                subject: "good morning",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(170274527543),
+                removedAt: null,
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
+            }
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)
     }
 }
-
-
-
-
