@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { EmailList } from "../cmps/EmailList";
 import { EmailFilter } from "../cmps/EmailFilter";
 import { emailService } from "../services/email.service";
-import { EmailPreview } from "../cmps/EmailPreview";
 import { EmailFolderList } from "../cmps/EmailFolderList";
 
 export function EmailIndex() {
@@ -58,8 +57,9 @@ export function EmailIndex() {
         <section className="email-index">
             <h1>Welcome! this is our misterEmail</h1>
             <EmailFilter filterBy={{body,isRead}} onSetFilter={onSetFilter} />
-            <EmailFolderList filterBy={status} onSetFilter={onSetFilter}/>
             <EmailList emails={emails} onUpdateEmail={onUpdateEmail} onSetFilter={onSetFilter} onUpdateStar={onUpdateStar}/>
+            <EmailFolderList filterBy={status} onSetFilter={onSetFilter}/>
+          
         </section>
     )
 }

@@ -1,17 +1,10 @@
 import { Route, HashRouter as Router, Routes } from 'react-router-dom';
-
 import { Home } from './pages/HomePage'
-import { About } from './pages/AboutPage';
-
 import { AppFooter } from './cmps/AppFooter'
 import { AppHeader } from './cmps/AppHeader'
 import { EmailIndex } from './pages/EmailIndex';
 import { EmailDetails } from './cmps/EmailDetails';
-//import { AboutTeam } from './cmps/AboutTeam';
-//import { AboutVision } from './cmps/AboutVision';
-import React, { Component } from 'react';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import { EmailList } from './cmps/EmailList';
+import React from 'react';
 import { EmailFolderList } from './cmps/EmailFolderList';
 
 export function App() {

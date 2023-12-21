@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router"
-import { emailService } from "../services/email.service"
 import { FaFirstdraft, FaInbox, FaRegStar, FaTrash } from "react-icons/fa"
-import { EmailList } from "./EmailList"
-import { EmailIndex } from "../pages/EmailIndex"
 import { IoSendOutline } from "react-icons/io5"
 
 
@@ -17,9 +13,9 @@ export function EmailFolderList({ filterBy, onSetFilter }) {
 
     return (
         <ul className="email-menu">
-        <li><label className="box-inbox" onClick={() => { alert('inbox') }}>
+        <li><span className="box-inbox" onClick={() => setFilterByToEdit({ status: 'inbox' })}>
             <FaInbox /> Inbox
-        </label>
+        </span>
         </li>
         <li>
             <span className="box-starred" onClick={() => setFilterByToEdit({ status: 'star' })}>
@@ -27,14 +23,14 @@ export function EmailFolderList({ filterBy, onSetFilter }) {
             </span>
         </li>
         <li>
-            <label className="box-sent" onClick={() => { alert('sent') }}>
+            <span className="box-sent" onClick={() => setFilterByToEdit({ status: 'sent' })}>
                 <IoSendOutline /> Sent
-            </label>
+            </span>
         </li>
         <li>
-            <label className="box-draft" onClick={() => { alert('draft') }}>
+            <span className="box-draft" onClick={() => setFilterByToEdit({ status: 'draft' })}>
                 <FaFirstdraft /> Draft
-            </label>
+            </span>
         </li>
         <li>
             <span className="box-trash" onClick={() => setFilterByToEdit({ status: 'trash' }) }>
@@ -42,6 +38,5 @@ export function EmailFolderList({ filterBy, onSetFilter }) {
             </span>
         </li>
     </ul>
-       
     )
 }

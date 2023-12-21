@@ -1,4 +1,8 @@
-.email-preview {
+.email-main {
+    position: relative;
+  }
+  
+  .email-preview {
     background: #0076fd09;
     background-repeat: no-repeat;
     padding: 15px;
@@ -8,45 +12,19 @@
     justify-content: space-between;
     border-radius: 5px;
     cursor: pointer;
-}
-.email-preview .info {
-    padding: 10px;
-    flex-grow: 1;
-}
-span {
-    padding: 10px;
-}
-.email-preview:hover + .email-hover {
-    display: block;
-    color: black;
   }
-
-.email-hover{
+  
+  .email-hover {
     display: none;
-}
-
-.email-preview .actions a {
-    color: white;
-}
-
-.email-preview:hover .actions {
-    transform: translateY(0);
-
-}
-.email-menu{
-    list-style-type: none;
-}
-
-.read{
-    font-weight: normal;  
-}
-.unread{
-    font-weight: bold;  
-}
-.subject {
-    display: block;
-    width: 100px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
   }
+  
+  .email-hover.visible {
+    display: flex;
+  }
+  

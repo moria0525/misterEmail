@@ -1,7 +1,7 @@
 
 
 .email-list {
-    display: flex;
+
     flex-direction: column; /* Set the direction to column */
     padding: 0;
     gap: 15px;
@@ -10,7 +10,7 @@
 }
 
 .email-list .email-actions {
-    display: flex;
+ 
     align-items: center;
     justify-content: space-between;
     transition: transform 0.2s;
@@ -39,7 +39,7 @@
 .box-compose{
 	
 	border-radius:28px;
-	display:inline-block;
+	
 	cursor:pointer;
 	padding:10px 10px;
 	text-decoration:none;
