@@ -79,8 +79,8 @@ input {
 
 .main-app {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-auto-rows: 100px 1fr 100px;
 }
 
 .main-app main {

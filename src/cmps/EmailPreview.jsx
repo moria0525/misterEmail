@@ -21,9 +21,9 @@ export function EmailPreview({ email, onUpdateEmail, onUpdateStar }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <span className="icon" onClick={handleClick}>
+      <div className="icon" onClick={handleClick}>
         {isStar ? <FaStar /> : <FaRegStar />}
-      </span>
+      </div>
       <Link
         to={`/email/${email.id}`}
         onClick={() => {

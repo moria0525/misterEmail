@@ -1,6 +1,9 @@
 .email-main {
-    position: relative;
+
+    display: grid;
+    width: 100%;
   }
+  
   
   .email-preview {
     background: #0076fd09;
@@ -10,9 +13,9 @@
     font-weight: bold;
     overflow: hidden;
     justify-content: space-between;
-    border-radius: 5px;
     cursor: pointer;
   }
+  
   
   .email-hover {
     display: none;

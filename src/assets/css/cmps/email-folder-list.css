@@ -1,0 +1,48 @@
+/* src/assets/css/cmps/email-list.css */
+
+.bar-side {
+    padding: 10px;
+    border-right: 1px  #ccc;
+  }
+  
+  .box-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .box-list li {
+    margin-bottom: 10px;
+  }
+  
+  .box-inbox,
+  .box-starred,
+  .box-sent,
+  .box-draft,
+  .box-trash {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .box-inbox:hover,
+  .box-starred:hover,
+  .box-sent:hover,
+  .box-draft:hover,
+  .box-trash:hover {
+    background-color: #e6e6e6;
+  }
+  
+  .box-inbox > svg,
+  .box-starred > svg,
+  .box-sent > svg,
+  .box-draft > svg,
+  .box-trash > svg {
+    margin-right: 8px;
+  }
+  
+  /* Add more styling as needed */
+  

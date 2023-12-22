@@ -1,24 +1,33 @@
-
-
 .email-list {
-
-    flex-direction: column; /* Set the direction to column */
-    padding: 0;
+    display: grid;
+    grid-auto-rows: 50px;
     gap: 15px;
     list-style-type: none;
-    width: 700px;
+    padding: 0;
+    margin: 0;
+    height: 100%;
 }
 
+.email-list li {
+    min-height: 50px;
+    /* Adjust the minimum height as needed */
+    line-height: 1.5;
+    /* Adjust the line height as needed */
+}
+
+
 .email-list .email-actions {
- 
+
     align-items: center;
     justify-content: space-between;
     transition: transform 0.2s;
-   
+
 }
 
 
-.filter-date, .filter-subject, .filter-all{
+.filter-date,
+.filter-subject,
+.filter-all {
     font-family: aktiv-grotesk-extended, sans-serif;
     font-weight: 700;
     border: 2px solid #fffefe;
@@ -27,8 +36,10 @@
     color: var(--font-color-black);
     background-color: var(--btn-bg-color-hover);
 }
+
 .email-container {
-    display: flex;
+
+    display: grid;
 }
 
 .left-sidebar .email-menu {
@@ -36,12 +47,13 @@
     padding: 10px;
     line-height: 40px;
 }
-.box-compose{
-	
-	border-radius:28px;
-	
-	cursor:pointer;
-	padding:10px 10px;
-	text-decoration:none;
-	
+
+.box-compose {
+
+    border-radius: 10px;
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 10px;
+    text-decoration: none;
+
 }

@@ -3,6 +3,7 @@ import { EmailList } from "../cmps/EmailList";
 import { EmailFilter } from "../cmps/EmailFilter";
 import { emailService } from "../services/email.service";
 import { EmailFolderList } from "../cmps/EmailFolderList";
+import "/src/assets/css/cmps/email-index.css";
 
 export function EmailIndex() {
 
@@ -55,11 +56,11 @@ export function EmailIndex() {
     const { status, body, isRead } = filterBy
     return (
         <section className="email-index">
-            <h1>Welcome! this is our misterEmail</h1>
-            <EmailFilter filterBy={{body,isRead}} onSetFilter={onSetFilter} />
-            <EmailList emails={emails} onUpdateEmail={onUpdateEmail} onSetFilter={onSetFilter} onUpdateStar={onUpdateStar}/>
-            <EmailFolderList filterBy={status} onSetFilter={onSetFilter}/>
-          
+            <EmailFilter filterBy={{ body, isRead }} onSetFilter={onSetFilter} />
+            <div className="main-email">
+                <EmailFolderList filterBy={status} onSetFilter={onSetFilter} />
+                <EmailList emails={emails} onUpdateEmail={onUpdateEmail} onSetFilter={onSetFilter} onUpdateStar={onUpdateStar} />
+            </div>
         </section>
     )
 }
