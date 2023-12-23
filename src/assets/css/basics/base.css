@@ -89,8 +89,8 @@ input {
 }
 
 .main-app>footer {
-    background-color: #111;
-    color: white;
+    background-color: azure;
+    color: rgb(84, 17, 147);
 }
 
 a.active {

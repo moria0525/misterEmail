@@ -1,18 +1,22 @@
 .app-header {
-    background: rgb(255, 107, 107);
-    color: white;
+    background-color:azure;
+    color: rgb(84, 17, 147);
+}
 
+.logo{
+    position:relative;
+    width: 150px;
+    float:left;
+    cursor: pointer;
+}
+.app-header nav {
+    float: right;
 }
 
 .app-header section.container {
     display: flex;
-    align-items: center;
+    align-items:start;
     justify-content: space-between;
-}
-
-.app-header h1.logo {
-    flex-grow: 1;
-    font-weight: 600;
 }
 
 .app-header .back {

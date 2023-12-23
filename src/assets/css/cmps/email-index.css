@@ -2,7 +2,7 @@
     display: grid; 
     grid-template-columns: 0.5fr 23fr; /* Two columns with equal width */
     grid-auto-rows: auto 1fr auto;
-   
+
     
 }
 

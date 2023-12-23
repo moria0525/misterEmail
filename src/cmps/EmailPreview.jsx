@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,21 +9,29 @@ export function EmailPreview({ email, onUpdateEmail, onUpdateStar }) {
 
   const handleClick = (event) => {
     event.stopPropagation(); 
-    setIsStar((current) => !current);
+   // setIsStar((current) => !current);
     onUpdateStar(email);
   };
 
   const handleEmailClick = () => {
-    setIsRead(!isRead);
+   // setIsRead(!isRead);
     onUpdateEmail(email);
     navigate(`/email/${email.id}`);
   };
 
-  const style = { color: "gold"}
+  useEffect(() => {
+    setIsRead(email.isRead);
+    setIsStar(email.isStarred);
+  }, []);
+
+
+  const style = { color: "gold"};
+  const fontIsRead = !email.isRead ? 700 : 400;
+  console.log(fontIsRead)
   return (
     
     <div className="email-main">
-      <div className="email-preview" onClick={handleEmailClick}>
+      <div className="email-preview" onClick={handleEmailClick} style={{fontWeight:fontIsRead}}>
         <div className="icon" onClick={handleClick}>{isStar ? <FaStar style={style}/> : <FaRegStar/>} </div>
         <span className="from">{email.from}</span>
         <span className="subject">{email.subject}</span>

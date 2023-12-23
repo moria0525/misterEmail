@@ -20,9 +20,11 @@ export function EmailIndex() {
 
     async function onUpdateEmail(emailToUpdate) {
         try {
+            if (!emailToUpdate.isRead) {
             const updatedEmail = {
                 ...emailToUpdate,
-                isRead: !emailToUpdate.isRead
+                isRead: true
+            
             }
             await emailService.save(updatedEmail)
             setEmails(prevEmails => {
@@ -33,6 +35,7 @@ export function EmailIndex() {
                     return email
                 })
             })
+        }
         } catch (error) {
             console.log('error:', error)
         }

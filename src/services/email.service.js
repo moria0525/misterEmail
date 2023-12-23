@@ -127,6 +127,50 @@ function _createEmails() {
                 removedAt: null,
                 from: "moria0525@gmail.com",
                 to: loggedinUser.email
+            },
+            {
+                id: utilService.makeId(),
+                subject: "hello",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(1702745276),
+                removedAt: null,
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
+            },
+            {
+                id: utilService.makeId(),
+                subject: "hi",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(170274527543),
+                removedAt: null,
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
+            },
+            {
+                id: utilService.makeId(),
+                subject: "good morning",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(170274527543),
+                removedAt: null,
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
+            },
+            {
+                id: utilService.makeId(),
+                subject: "good day",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(999274527543),
+                removedAt: null,
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
             }
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)
