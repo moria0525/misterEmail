@@ -1,33 +1,46 @@
-.email-main {
+.email-preview {
+  background-repeat: no-repeat;
+  padding: 15px;
+  display: flex;
+  font-weight: bold;
+  overflow: hidden;
+  justify-content: space-between;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s;
+}
 
-    display: grid;
-    width: 100%;
-  }
-  
-  
-  .email-preview {
-    background: #0076fd09;
-    background-repeat: no-repeat;
-    padding: 15px;
-    display: flex;
-    font-weight: bold;
-    overflow: hidden;
-    justify-content: space-between;
-    cursor: pointer;
-  }
-  
-  
-  .email-hover {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .email-hover.visible {
-    display: flex;
-  }
-  
+.email-preview:hover {
+  background-color: #f5f5f5;
+}
+
+.email-preview .icon {
+  margin-right: 10px;
+}
+
+.email-preview span {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+
+.email-preview span.from {
+  display: inline-block;
+
+
+}
+
+.email-preview span.subject {
+  flex-grow: 5;
+  float: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0px;
+}
+
+.email-preview h4 {
+  margin-left: 10px;
+}

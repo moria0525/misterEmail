@@ -86,7 +86,7 @@ function _createEmails() {
         emails = [
             {
                 id: utilService.makeId(),
-                subject: "helllo",
+                subject: "hello",
                 body: utilService.makeLorem(),
                 isRead: false,
                 isStarred: false,
@@ -113,6 +113,17 @@ function _createEmails() {
                 isRead: false,
                 isStarred: false,
                 sentAt: utilService.convertDate(170274527543),
+                removedAt: null,
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
+            },
+            {
+                id: utilService.makeId(),
+                subject: "good day",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(999274527543),
                 removedAt: null,
                 from: "moria0525@gmail.com",
                 to: loggedinUser.email
