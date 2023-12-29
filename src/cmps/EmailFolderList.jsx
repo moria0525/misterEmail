@@ -2,41 +2,43 @@ import { useEffect, useState } from "react"
 import { FaFirstdraft, FaInbox, FaPen, FaRegStar, FaTrash } from "react-icons/fa"
 import { IoSendOutline } from "react-icons/io5"
 import "/src/assets/css/cmps/email-folder-list.css";
+import { Link } from "react-router-dom";
 
-export function EmailFolderList({ filterBy, onSetFilter }) {
+export function EmailFolderList() {
 
-    const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
+    const [filterByToEdit, setFilterByToEdit] = useState(null)
 
-    useEffect(() => {
-        onSetFilter(filterByToEdit)
-    }, [filterByToEdit])
+    // useEffect(() => {
+    //     onSetFilter(filterByToEdit)
+    // }, [filterByToEdit])
 
     return (
         <div className="bar-side">
             <ul className="box-list">
-                <li><span className="box-inbox" onClick={() => setFilterByToEdit({ status: 'inbox' })}>
-                    <FaInbox /> Inbox
-                </span>
+                <li>
+                    <Link to={`/email/inbox`} className="box-inbox" onClick={() => setFilterByToEdit({ status: 'inbox' })}>
+                        <FaInbox />Inbox
+                    </Link>
                 </li>
                 <li>
-                    <span className="box-starred" onClick={() => setFilterByToEdit({ status: 'star' })}>
+                    <Link to={`/email/star`} className="box-starred" onClick={() => setFilterByToEdit({ status: 'star' })}>
                         <FaRegStar />Starred
-                    </span>
+                    </Link>
                 </li>
                 <li>
-                    <span className="box-sent" onClick={() => setFilterByToEdit({ status: 'sent' })}>
-                        <IoSendOutline /> Sent
-                    </span>
+                    <Link to={`/email/sent`} className="box-sent" onClick={() => setFilterByToEdit({ status: 'sent' })}>
+                        <IoSendOutline />Sent
+                    </Link>
                 </li>
                 <li>
-                    <span className="box-draft" onClick={() => setFilterByToEdit({ status: 'draft' })}>
-                        <FaFirstdraft /> Draft
-                    </span>
+                    <Link to={`/email/draft`} className="box-draft" onClick={() => setFilterByToEdit({ status: 'draft' })}>
+                        <FaFirstdraft />Draft
+                    </Link>
                 </li>
                 <li>
-                    <span className="box-trash" onClick={() => setFilterByToEdit({ status: 'trash' })}>
-                        <FaTrash /> Trash
-                    </span>
+                    <Link to={`/email/trash`} className="box-trash" onClick={() => setFilterByToEdit({ status: 'trash' })}>
+                        <FaTrash />Trash
+                    </Link>
                 </li>
             </ul>
         </div>

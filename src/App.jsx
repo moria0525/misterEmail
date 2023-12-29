@@ -6,9 +6,10 @@ import { EmailIndex } from './pages/EmailIndex';
 import { EmailDetails } from './cmps/EmailDetails';
 import React from 'react';
 import { EmailFolderList } from './cmps/EmailFolderList';
+import { EmailEdit } from './cmps/EmailCompose';
+import { UserMsg } from './cmps/UserMsg';
 
 export function App() {
-
     return (
         <Router>
             <section className='main-app'>
@@ -16,15 +17,17 @@ export function App() {
                 <main className='container'>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/email" element={<EmailIndex />} />
-                        <Route path="/email/:emailId" element={<EmailDetails/>} />
-                        <Route path="/email/starred" element={<EmailFolderList/>}/>
+                        <Route path="/email/:folder" element={<EmailIndex />}>
+                             <Route path="/email/:folder/edit/:emailId?" element={<EmailEdit />} />
+                        </Route>
+                        <Route path="/email/:folder/:emailId" element={<EmailDetails />} />
+                       
                     </Routes>
+
                 </main>
+                <UserMsg />
                 <AppFooter />
             </section>
         </Router>
-
-
-    )
+    );
 }

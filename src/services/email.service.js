@@ -7,7 +7,8 @@ export const emailService = {
     remove,
     getById,
     createEmail,
-    getDefaultFilter
+    getDefaultFilter,
+    getFilterFromParams
 }
 
 const STORAGE_KEY = 'emails'
@@ -25,18 +26,18 @@ const filterBy = {
 
 _createEmails()
 
-async function query(filterBy) {
+async function query(filterBy,folder) {
     let emails = await storageService.query(STORAGE_KEY);
     let { status, body = '', isRead } = filterBy
     if (filterBy.isRead !== 'All') {
         emails = emails.filter(email=>
             email.isRead === isRead)
     }
-    if (status === 'star') {
+    if (folder === 'star') {
         emails = emails.filter(email => 
-            email.isStarred === true);
+            email.isStarred === true);   
     }
-    if (status === 'trash') {
+    if (folder === 'trash') {
         emails = emails.filter(email => 
             email.removedAt === true);
     }
@@ -79,6 +80,16 @@ function getDefaultFilter() {
         isRead: "All",
     }
 }
+
+function getFilterFromParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+    for (const field in defaultFilter) {
+        filterBy[field] = searchParams.get(field) || defaultFilter[field]
+    }
+    return filterBy
+}
+
 
 function _createEmails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)

@@ -22,9 +22,6 @@ export function EmailFilter({ filterBy, onSetFilter }) {
     const { status, body, isRead } = filterByToEdit
     return (
         <section className="email-filter">
-            <button className="box-compose" onClick={() => { alert('compose') }}>
-                <FaPen /> Compose
-            </button>
             <div className="box-filter">
             <form>
                 <label htmlFor="body"></label>

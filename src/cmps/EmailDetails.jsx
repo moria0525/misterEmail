@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router"
 import { emailService } from "../services/email.service"
 import { FaTrash } from "react-icons/fa"
 
+
 export function EmailDetails() {
     const [email, setEmail] = useState(null)
     const params = useParams()
@@ -10,7 +11,7 @@ export function EmailDetails() {
 
     useEffect(() => {
         loadEmail()
-    }, [params.emailId])
+    }, [params.emailId,params.folder])
 
     async function loadEmail() {
         try {
@@ -22,7 +23,7 @@ export function EmailDetails() {
     }
 
     function onBack() {
-        navigate('/email/')
+        navigate('/email/:folder')
     }
 
     async function onRemoveEmail(emailId) {
