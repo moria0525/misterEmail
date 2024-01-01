@@ -21,9 +21,7 @@
     align-items: center;
     justify-content: space-between;
     transition: transform 0.2s;
-
 }
-
 
 .filter-date,
 .filter-subject,

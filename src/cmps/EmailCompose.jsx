@@ -44,6 +44,7 @@ export function EmailEdit() {
             const updatedEmail = {
                 ...email,
                 sentAt: utilService.convertDate(Date.now()),
+                body: ev.target.body.value,
                 isRead: false,
             };
             setEmail(updatedEmail);
@@ -52,7 +53,7 @@ export function EmailEdit() {
             } else {
                 await onAddEmail(updatedEmail);
             }
-            navigate('/');
+            navigate('/email/:folder');
         } catch (err) {
             console.log('Had issues saving email', err);
         }

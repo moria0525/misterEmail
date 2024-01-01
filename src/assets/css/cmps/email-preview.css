@@ -7,10 +7,6 @@
   transition: background-color 0.3s;
 }
 
-.email-main:hover {
-  background-color: #f5f5f5;
-}
-
 .icon {
   margin-right: 10px;
 }
@@ -44,5 +40,5 @@
 }
 
 .email-preview .date {
-  flex: 2; /* Adjust the flex value based on your preference */
+  flex:5; /* Adjust the flex value based on your preference */
 }

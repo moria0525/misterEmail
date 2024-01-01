@@ -6,6 +6,8 @@ import { EmailFolderList } from "../cmps/EmailFolderList";
 import { Link, Outlet, useParams, useSearchParams } from "react-router-dom";
 import { EmailDetails } from "../cmps/EmailDetails";
 import "/src/assets/css/cmps/email-index.css";
+import { utilService } from "../services/util.service";
+import { storageService } from "../services/async-storage.service";
 
 export function EmailIndex() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -62,47 +64,58 @@ export function EmailIndex() {
     }
   }
 
-  async function onUpdateDate(email) {
-    try {
-      const date = Date.now()
-      alert(date)
-    } catch (error) {
-      console.log("error:", error);
-    }
-  }
+
+
 
   async function onAddEmail(EmailToAdd) {
     try {
       const savedEmail = await emailService.save(EmailToAdd);
-      setEmails((prevEmails) => [...prevEmails, savedEmail]);
+      setEmails((prevEmails) => [savedEmail, ...prevEmails]);
     } catch (err) {
       console.log("Had issues saving email", err);
     }
   }
 
+  async function onSortEmail() {
+    try {
+      const sortedEmails = [...emails].sort(function (a, b) {
+        return new Date(b.sentAt) - new Date(a.sentAt) 
+      });
+      setEmails(sortedEmails)
+    } catch (error) {
+      console.log("Error sorting emails:", error);
+    }
+  }
+
+
   if (!emails) return <div>Loading...</div>;
 
-  const { status, body, isRead } = filterBy;
-
+  const { status, subject, isRead } = filterBy;
+ 
   return (
+    
     <section className="email-index">
-     <Link to={`/email/${params.folder}/edit`}>
+    <button onClick={onSortEmail}>Date</button>
+     <Link to={`/${params.folder}/edit`}>
       <button>Compose</button>
    </Link>
-      <EmailFilter onSetFilter={onSetFilter} filterBy={{ body, isRead }} />
+   
+      <EmailFilter onSetFilter={onSetFilter} filterBy={{ subject, isRead }} />
       <div className="main-email">
         <EmailFolderList />
-        <EmailList
+        
+        {!params.emailId && <EmailList
           emails={emails}
           folder={params.folder}
           onUpdateEmailRead={onUpdateEmailRead}
           onSetFilter={onSetFilter}
           onUpdateStar={onUpdateStar}
-        />
+        />}
                 <Outlet
           id="email-details"
-          context={{ onAddEmail, onUpdateEmailRead }}
+          context={{ onAddEmail, onUpdateEmailRead}}
         />
+        
       </div>
     </section>
   );

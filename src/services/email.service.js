@@ -1,3 +1,4 @@
+import { EmailIndex } from '../pages/EmailIndex.jsx'
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 
@@ -8,7 +9,9 @@ export const emailService = {
     getById,
     createEmail,
     getDefaultFilter,
-    getFilterFromParams
+    getFilterFromParams,
+    onRemoveEmail,
+    onUpdateDelete,
 }
 
 const STORAGE_KEY = 'emails'
@@ -20,26 +23,42 @@ const loggedinUser = {
 
 const filterBy = {
     status: 'inbox/sent/star/trash',
-    txt: 'puki', // no need to support complex text search 
+    txt: 'puki',
     isRead: true / false / null, // (optional property, if missing: show all) 
 }
 
 _createEmails()
 
-async function query(filterBy,folder) {
+async function query(filterBy, folder) {
     let emails = await storageService.query(STORAGE_KEY);
-    let { status, body = '', isRead } = filterBy
+    let { status, subject = '', isRead } = filterBy
     if (filterBy.isRead !== 'All') {
-        emails = emails.filter(email=>
+        emails = emails.filter(email =>
             email.isRead === isRead)
     }
     if (folder === 'star') {
-        emails = emails.filter(email => 
-            email.isStarred === true);   
+        emails = emails.filter(email =>
+            email.isStarred === true);
     }
     if (folder === 'trash') {
-        emails = emails.filter(email => 
-            email.removedAt === true);
+        emails = emails.filter(email =>
+            email.removedAt !== '');
+    }
+    if (folder === 'inbox') {
+        emails = emails.filter(email =>
+            (email.removedAt === '' && email.from !== loggedinUser.email));
+    }
+    if (folder === 'sent') {
+        console.log("sent")
+        emails = emails.filter(email =>
+            email.from === loggedinUser.email);
+    }
+
+    if (subject) {
+        emails = emails.filter(email =>
+            email.subject.toLowerCase().includes(subject.toLowerCase())
+        );
+
     }
     return emails;
 }
@@ -60,14 +79,14 @@ function save(emailToSave) {
     }
 }
 
-function createEmail(id = '', subject = '', body = '', isRead, isStarred, sentAt = '', from = '', to = '') {
+function createEmail(id = '', subject = '', body = '', isRead, isStarred, sentAt = '', removedAt = '', from = '', to = '') {
     return {
         subject,
         body,
         isRead,
         isStarred,
         sentAt,
-        removedAt: null,
+        removedAt,
         from,
         to
     }
@@ -75,8 +94,8 @@ function createEmail(id = '', subject = '', body = '', isRead, isStarred, sentAt
 
 function getDefaultFilter() {
     return {
-        status:'inbox/sent/star/trash',
-        body: '',
+        status: 'inbox/sent/star/trash',
+        subject: '',
         isRead: "All",
     }
 }
@@ -91,99 +110,128 @@ function getFilterFromParams(searchParams) {
 }
 
 
+
+
+
 function _createEmails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
     if (!emails || !emails.length) {
         emails = [
             {
                 id: utilService.makeId(),
-                subject: "hello",
+                subject: "hello_me",
                 body: utilService.makeLorem(),
                 isRead: false,
                 isStarred: false,
-                sentAt: utilService.convertDate(1702745276),
-                removedAt: null,
+                sentAt: utilService.convertDate(170274327999),
+                removedAt: '',
+                from: loggedinUser.email,
+                to: 'moria0525@gmail.com'
+            },
+            {
+                id: utilService.makeId(),
+                subject: "hi2",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(190274527000),
+                removedAt: '',
                 from: "moria0525@gmail.com",
                 to: loggedinUser.email
             },
             {
                 id: utilService.makeId(),
-                subject: "hi",
+                subject: "good morning3",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(107274527543),
+                removedAt: '',
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
+            },
+            {
+                id: utilService.makeId(),
+                subject: "good day4",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(170574527123),
+                removedAt: '',
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
+            },
+            {
+                id: utilService.makeId(),
+                subject: "hello5",
+                body: utilService.makeLorem(),
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.convertDate(171274527111),
+                removedAt: '',
+                from: "moria0525@gmail.com",
+                to: loggedinUser.email
+            },
+            {
+                id: utilService.makeId(),
+                subject: "hi6",
                 body: utilService.makeLorem(),
                 isRead: false,
                 isStarred: false,
                 sentAt: utilService.convertDate(170274527543),
-                removedAt: null,
+                removedAt: '',
                 from: "moria0525@gmail.com",
                 to: loggedinUser.email
             },
             {
                 id: utilService.makeId(),
-                subject: "good morning",
+                subject: "good morning7",
                 body: utilService.makeLorem(),
                 isRead: false,
                 isStarred: false,
-                sentAt: utilService.convertDate(170274527543),
-                removedAt: null,
+                sentAt: utilService.convertDate(570274527543),
+                removedAt: '',
                 from: "moria0525@gmail.com",
                 to: loggedinUser.email
             },
             {
                 id: utilService.makeId(),
-                subject: "good day",
+                subject: "good day8",
                 body: utilService.makeLorem(),
                 isRead: false,
                 isStarred: false,
-                sentAt: utilService.convertDate(999274527543),
-                removedAt: null,
-                from: "moria0525@gmail.com",
-                to: loggedinUser.email
-            },
-            {
-                id: utilService.makeId(),
-                subject: "hello",
-                body: utilService.makeLorem(),
-                isRead: false,
-                isStarred: false,
-                sentAt: utilService.convertDate(1702745276),
-                removedAt: null,
-                from: "moria0525@gmail.com",
-                to: loggedinUser.email
-            },
-            {
-                id: utilService.makeId(),
-                subject: "hi",
-                body: utilService.makeLorem(),
-                isRead: false,
-                isStarred: false,
-                sentAt: utilService.convertDate(170274527543),
-                removedAt: null,
-                from: "moria0525@gmail.com",
-                to: loggedinUser.email
-            },
-            {
-                id: utilService.makeId(),
-                subject: "good morning",
-                body: utilService.makeLorem(),
-                isRead: false,
-                isStarred: false,
-                sentAt: utilService.convertDate(170274527543),
-                removedAt: null,
-                from: "moria0525@gmail.com",
-                to: loggedinUser.email
-            },
-            {
-                id: utilService.makeId(),
-                subject: "good day",
-                body: utilService.makeLorem(),
-                isRead: false,
-                isStarred: false,
-                sentAt: utilService.convertDate(999274527543),
-                removedAt: null,
+                sentAt: utilService.convertDate(970274527543),
+                removedAt: '',
                 from: "moria0525@gmail.com",
                 to: loggedinUser.email
             }
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)
     }
+
+
 }
+
+async function onRemoveEmail(email, folder) {
+    try {
+        email.isRead = !email.isRead
+        onUpdateDelete(email)
+        if (folder === 'trash') {
+            await remove(email.id)
+        }
+        // navigate('/email/:folder')
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+
+async function onUpdateDelete(email) {
+    try {
+        email.removedAt = Date.now()
+        await save(email)
+    } catch (error) {
+        console.log("error:", error)
+    }
+}
+
+

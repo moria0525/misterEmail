@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import { emailService } from "../services/email.service"
 import { FaTrash } from "react-icons/fa"
-
+import { utilService } from "../services/util.service"
 
 export function EmailDetails() {
     const [email, setEmail] = useState(null)
@@ -23,30 +23,19 @@ export function EmailDetails() {
     }
 
     function onBack() {
-        navigate('/email/:folder')
+        navigate('/:folder')
     }
 
-    async function onRemoveEmail(emailId) {
-        try {
-            await emailService.remove(emailId)
-            navigate('/email/')
-        } catch (error) {
-            console.log('error:', error)
-        }
-    }
 
     if (!email) return <div>Loading...</div>
     return (
         <section className="email-details">
-            <FaTrash onClick={() => { onRemoveEmail(email.id) }} />
-            <h3>{email.sentAt}</h3>
-            <h3>from: {email.from}</h3>
-            <h3>sentAt: {email.sentAt}</h3>
-            <h3>subject: {email.subject}</h3>
+            <FaTrash className="email-trash" onClick={() => { emailService.onRemoveEmail(email, params.folder) }} />
+            <h2>{email.sentAt}</h2>
+            <h2>from: {email.from}</h2>
+            <h1>{email.subject}</h1>
             <h3>{email.body}</h3>
-            <h3>isRead: {String(email.isRead)}</h3>
-            <h3>isStarred: {String(email.isStarred)}</h3>
-            <button onClick={onBack}>Back</button>
+            <button className="btn-back" onClick={onBack}>Back</button>
         </section>
     )
 }
