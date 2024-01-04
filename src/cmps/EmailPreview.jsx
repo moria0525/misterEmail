@@ -32,6 +32,7 @@ export function EmailPreview({ email, folder, onUpdateEmailRead, onUpdateStar })
   };
 
   const handleEmailClick = () => {
+    console.log("here!")
     setIsRead(!isRead);
     onUpdateEmailRead(email);
     // navigate(`/email/${folder}/${email.id}`);

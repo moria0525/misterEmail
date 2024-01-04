@@ -15,6 +15,8 @@ export function EmailIndex() {
   const [filterBy, setFilterBy] = useState(
     emailService.getFilterFromParams(searchParams)
   );
+  const [ascendingOrder, setAscendingOrder] = useState(true);
+
   const params = useParams();
 
   useEffect(() => {
@@ -25,6 +27,11 @@ export function EmailIndex() {
   function onSetFilter(filterBy) {
     setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }));
   }
+
+  async function toggleSort(ev) {
+    setAscendingOrder(!ascendingOrder);
+    onSortEmail(!ascendingOrder ? 'asc' : 'desc', ev);
+  };
 
   async function loadEmails() {
     try {
@@ -40,7 +47,7 @@ export function EmailIndex() {
       if (!emailToUpdate.isRead) {
         const updatedEmail = {
           ...emailToUpdate,
-          isRead:!emailToUpdate.isRead,
+          isRead: !emailToUpdate.isRead,
         };
         await emailService.save(updatedEmail);
         setEmails((prevEmails) =>
@@ -65,8 +72,6 @@ export function EmailIndex() {
   }
 
 
-
-
   async function onAddEmail(EmailToAdd) {
     try {
       const savedEmail = await emailService.save(EmailToAdd);
@@ -76,10 +81,27 @@ export function EmailIndex() {
     }
   }
 
-  async function onSortEmail() {
+  async function onSortEmail(order, ev) {
     try {
-      const sortedEmails = [...emails].sort(function (a, b) {
-        return new Date(b.sentAt) - new Date(a.sentAt) 
+      const sortedEmails = [...emails].sort((a, b) => {
+        if (ev.target.value === "date") {
+          if (order === 'asc')
+            return new Date(a.sentAt) - new Date(b.sentAt)
+          else
+            return new Date(b.sentAt) - new Date(a.sentAt)
+        }
+        if (ev.target.value === "subject") {
+          if (order === 'asc')
+            return a.subject.localeCompare(b.subject)
+          else
+            return b.subject.localeCompare(a.subject)
+        }
+        if (ev.target.value === "read") {
+          if (order === 'asc')
+            return a.isRead - b.isRead
+          else
+            return b.isRead - a.isRead
+        }
       });
       setEmails(sortedEmails)
     } catch (error) {
@@ -91,19 +113,22 @@ export function EmailIndex() {
   if (!emails) return <div>Loading...</div>;
 
   const { status, subject, isRead } = filterBy;
- 
+
   return (
-    
+
     <section className="email-index">
-    <button onClick={onSortEmail}>Date</button>
-     <Link to={`/${params.folder}/edit`}>
-      <button>Compose</button>
-   </Link>
-   
+
+      <Link to={`/${params.folder}/edit`}>
+        <button>Compose</button>
+      </Link>
+
       <EmailFilter onSetFilter={onSetFilter} filterBy={{ subject, isRead }} />
+      <button value={"date"} onClick={e => toggleSort(e)} >Date {ascendingOrder ? '↑' : '↓'} </button>
+      <button value={"subject"} onClick={e => toggleSort(e)} >subject {ascendingOrder ? '↑' : '↓'}</button>
+      <button value={"read"} onClick={e => toggleSort(e)} >Status Reading {ascendingOrder ? '↑' : '↓'}</button>
       <div className="main-email">
-        <EmailFolderList />
-        
+        <EmailFolderList emails = {emails} />
+
         {!params.emailId && <EmailList
           emails={emails}
           folder={params.folder}
@@ -111,11 +136,11 @@ export function EmailIndex() {
           onSetFilter={onSetFilter}
           onUpdateStar={onUpdateStar}
         />}
-                <Outlet
+        <Outlet
           id="email-details"
-          context={{ onAddEmail, onUpdateEmailRead}}
+          context={{ onAddEmail, onUpdateEmailRead }}
         />
-        
+
       </div>
     </section>
   );

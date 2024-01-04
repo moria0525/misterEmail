@@ -1,7 +1,7 @@
 /* src/assets/css/cmps/email-list.css */
 
 .bar-side {
-    padding: 10px;
+    padding: 15px;
     border-right: 1px  #ccc;
   }
   
@@ -9,6 +9,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 150px;
   }
   
   .box-list li {
