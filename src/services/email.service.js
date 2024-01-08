@@ -12,14 +12,21 @@ export const emailService = {
     getFilterFromParams,
     onRemoveEmail,
     onUpdateDelete,
+    getUser
 }
 
 const STORAGE_KEY = 'emails'
 
 const loggedinUser = {
     email: 'user@appsus.com',
-    fullname: 'Mahatma Appsus'
+    fullname: 'Moria Rabayoff'
 }
+
+function getUser()
+{
+    return loggedinUser
+}
+
 
 const filterBy = {
     status: 'inbox/sent/star/trash',
@@ -81,6 +88,7 @@ function save(emailToSave) {
 
 function createEmail(id = '', subject = '', body = '', isRead, isStarred, sentAt = '', removedAt = '', from = '', to = '') {
     return {
+        id,
         subject,
         body,
         isRead,
@@ -94,7 +102,6 @@ function createEmail(id = '', subject = '', body = '', isRead, isStarred, sentAt
 
 function getDefaultFilter() {
     return {
-        status: 'inbox/sent/star/trash',
         subject: '',
         isRead: "All",
     }

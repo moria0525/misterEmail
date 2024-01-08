@@ -18,6 +18,7 @@ export function EmailDetails() {
             const email = await emailService.getById(params.emailId)
             setEmail(email)
         } catch (error) {
+            navigate('/email')
             console.log('error:', error)
         }
     }

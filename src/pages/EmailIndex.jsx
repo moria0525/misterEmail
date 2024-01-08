@@ -12,15 +12,13 @@ import { storageService } from "../services/async-storage.service";
 export function EmailIndex() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [emails, setEmails] = useState(null);
-  const [filterBy, setFilterBy] = useState(
-    emailService.getFilterFromParams(searchParams)
-  );
+  const [filterBy, setFilterBy] = useState(emailService.getFilterFromParams(searchParams))
   const [ascendingOrder, setAscendingOrder] = useState(true);
 
   const params = useParams();
 
   useEffect(() => {
-    setSearchParams();
+    setSearchParams(filterBy);
     loadEmails();
   }, [filterBy, params.folder]);
 
@@ -64,12 +62,18 @@ export function EmailIndex() {
 
   async function onUpdateStar(email) {
     try {
-      email.isStarred = !email.isStarred;
+      emails.map(e => {
+        if (e.id === email.id) {
+          return {...email, isStarred: true}
+        }
+      })
+      setEmails(emails => [...emails])
       await emailService.save(email);
     } catch (error) {
       console.log("error:", error);
     }
   }
+
 
 
   async function onAddEmail(EmailToAdd) {
@@ -113,7 +117,6 @@ export function EmailIndex() {
   if (!emails) return <div>Loading...</div>;
 
   const { status, subject, isRead } = filterBy;
-
   return (
 
     <section className="email-index">
@@ -127,7 +130,7 @@ export function EmailIndex() {
       <button value={"subject"} onClick={e => toggleSort(e)} >subject {ascendingOrder ? '↑' : '↓'}</button>
       <button value={"read"} onClick={e => toggleSort(e)} >Status Reading {ascendingOrder ? '↑' : '↓'}</button>
       <div className="main-email">
-        <EmailFolderList emails = {emails} />
+        <EmailFolderList emails={emails} />
 
         {!params.emailId && <EmailList
           emails={emails}

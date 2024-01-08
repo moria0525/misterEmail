@@ -28,6 +28,7 @@ export function EmailPreview({ email, folder, onUpdateEmailRead, onUpdateStar })
   const handleClick = (event) => {
     event.stopPropagation();
     setIsStar((current) => !current);
+    email.isStarred = !email.isStarred
     onUpdateStar(email);
   };
 
@@ -63,8 +64,8 @@ export function EmailPreview({ email, folder, onUpdateEmailRead, onUpdateStar })
           <div className="from">{email.from}</div>
           <div className="subject">{email.subject}</div>
           <div className="date">
-            {displayMode === "date" ? 
-            (email.sentAt) : (<FaTrash onClick={() => {emailService.onRemoveEmail(email, folder) }}/>)}
+            {displayMode === "date" ?
+              (email.sentAt) : (<FaTrash onClick={() => { emailService.onRemoveEmail(email, folder) }} />)}
           </div>
         </Link>
       </div>
